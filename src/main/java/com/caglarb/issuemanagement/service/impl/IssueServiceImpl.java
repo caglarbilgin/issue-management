@@ -1,8 +1,10 @@
 package com.caglarb.issuemanagement.service.impl;
 
 import com.caglarb.issuemanagement.dto.IssueDto;
+import com.caglarb.issuemanagement.entity.Issue;
 import com.caglarb.issuemanagement.repo.IssueRepository;
 import com.caglarb.issuemanagement.service.IssueService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,11 +15,13 @@ public class IssueServiceImpl implements IssueService {
 
 
     private final IssueRepository issueRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public IssueServiceImpl(IssueRepository issueRepository) { // burada issueRepository'i inject ediyoruz
+    public IssueServiceImpl(IssueRepository issueRepository, ModelMapper modelMapper) { // burada issueRepository'i inject ediyoruz
 
         this.issueRepository = issueRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -25,7 +29,10 @@ public class IssueServiceImpl implements IssueService {
         if(issue.getDate() == null){
             throw new IllegalArgumentException("Issue date can not be null !!");
         }
-        return null;
+
+        Issue issueDb = modelMapper.map(issue,Issue.class);
+        issueDb = issueRepository.save(issueDb);
+        return modelMapper.map(issueDb,IssueDto.class);
     }
 
     @Override
