@@ -1,5 +1,6 @@
 package com.caglarb.issuemanagement.service;
 
+import com.caglarb.issuemanagement.dto.ProjectDto;
 import com.caglarb.issuemanagement.entity.Project;
 import com.caglarb.issuemanagement.entity.User;
 import com.caglarb.issuemanagement.repo.ProjectRepository;
@@ -12,7 +13,7 @@ public interface ProjectService {
 
     Project save(Project project);
 
-    Project getById(Long id);
+    ProjectDto getById(Long id);
 
     List<Project> getByProjectCode(String projectCode);
 
