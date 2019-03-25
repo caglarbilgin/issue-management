@@ -17,12 +17,12 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date CreateAt;
-    @Column(name = "created_by", length = 100)
+    @Column(name = "created_by", length = 50)
     private String CreatedBy;
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date UpdatedAt;
-    @Column(name = "updated_by", length = 100)
+    @Column(name = "updated_by", length = 50)
     private String UpdatedBy;
     @Column(name = "status")
     private Boolean status;

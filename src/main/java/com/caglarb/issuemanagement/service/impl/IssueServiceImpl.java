@@ -45,8 +45,8 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public Tpage<IssueDto> getAllPageable(Pageable pageable) {
-        Tpage page = new Tpage<IssueDto>();
         Page<Issue> data = issueRepository.findAll(pageable);
+        Tpage page = new Tpage<IssueDto>();
         IssueDto[] dtos = modelMapper.map(data.getContent(),IssueDto[].class);
         page.setStat(data, Arrays.asList(dtos));
         return page;

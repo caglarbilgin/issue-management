@@ -14,7 +14,8 @@ public interface ProjectRepository extends JpaRepository<Project,Long> {
 
     List<Project> getAllByProjectCode(String projectCode);
 
-    List<Project> getAllByProjectCodeAndIdNotNull(String projectCode);
+    List<Project> getAllByProjectCodeAndIdNotNull(String projectCode);//camel case olarak class'ları yazabiliriz //bu kod satırında bütün proje kodlarını
+    //ve id'lerin null olmayanlarını getir.
 
     List<Project> getAllByProjectCodeAndProjectNameContains(String projectCode, String name);
 

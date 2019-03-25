@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 public class IssueManagementApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(IssueManagementApplication.class, args);
     }
 
