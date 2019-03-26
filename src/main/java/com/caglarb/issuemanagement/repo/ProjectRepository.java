@@ -12,12 +12,12 @@ import java.util.List;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project,Long> {
 
-    List<Project> getAllByProjectCode(String projectCode);
+    Project getByProjectCode(String projectCode);
 
-    List<Project> getAllByProjectCodeAndIdNotNull(String projectCode);//camel case olarak class'ları yazabiliriz //bu kod satırında bütün proje kodlarını
+    Project getByProjectCodeAndIdNot(String projectCode, Long id);//camel case olarak class'ları yazabiliriz //bu kod satırında bütün proje kodlarını
     //ve id'lerin null olmayanlarını getir.
 
-    List<Project> getAllByProjectCodeAndProjectNameContains(String projectCode, String name);
+    List<Project> getByProjectCodeAndProjectNameContains(String projectCode, String name);
 
     Page<Project> findAll(Pageable pageable);
 

@@ -4,6 +4,7 @@ import com.caglarb.issuemanagement.dto.ProjectDto;
 import com.caglarb.issuemanagement.entity.Project;
 import com.caglarb.issuemanagement.entity.User;
 import com.caglarb.issuemanagement.repo.ProjectRepository;
+import com.caglarb.issuemanagement.util.Tpage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,17 +12,17 @@ import java.util.List;
 
 public interface ProjectService {
 
-    Project save(Project project);
+    ProjectDto save(ProjectDto project);
 
     ProjectDto getById(Long id);
 
-    List<Project> getByProjectCode(String projectCode);
+    ProjectDto getByProjectCode(String projectCode);
 
-    List<Project> getByProjectCodeContains(String projectCode);
+    List<ProjectDto> getByProjectCodeContains(String projectCode);
 
-    Page<Project> getAllPageable(Pageable pageable);
+    Tpage<ProjectDto> getAllPageable(Pageable pageable);
 
-    Boolean delete (Project project);
+    Boolean delete (ProjectDto project);
 
-
+    ProjectDto update(Long id, ProjectDto project);
 }
