@@ -2,6 +2,7 @@ package com.caglarb.issuemanagement.api;
 
 import com.caglarb.issuemanagement.dto.ProjectDto;
 import com.caglarb.issuemanagement.service.impl.ProjectServiceImpl;
+import com.caglarb.issuemanagement.util.ApiPaths;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController //bu restful servisleri yayınlaybilmemiz için bu anotasyon gerekiyor
-@RequestMapping("/project") //bu projeyi yayınlamamız için bir path vermemiz gerekiyor
+@RequestMapping(ApiPaths.ProjectCtrl.CTRL) //bu projeyi yayınlamamız için bir path vermemiz gerekiyor
 public class ProjectController {
     //burada http methodlarımızı yayınlayacağımız servislerimizi yazıyoruz.
 
