@@ -15,7 +15,7 @@ import java.util.Date;
 @ControllerAdvice
 @Slf4j
 public class IMExceptionHandler extends ResponseEntityExceptionHandler {
-
+//Exceptionları modellemek için kullanıyoruz burada bir exception geldiği zaman sadece date ve message kısmı gelicek.
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<?> handleExceptions(Exception ex, WebRequest request) {
         log.error("ControllerAdvice -> ExceptionHandler -> " , ex ,request);
