@@ -1,0 +1,17 @@
+[
+  {
+    "_class": "com.caglarb.issuemanagement.entity.Project",
+    "projectCode": "IM2",
+    "projectName": "Issue Management Project"
+  },
+  {
+    "_class": "com.caglarb.issuemanagement.entity.Project",
+    "projectCode": "ERP-S2",
+    "projectName": "ERP Project for Sales"
+  },
+  {
+    "_class": "com.caglarb.issuemanagement.entity.Project",
+    "projectCode": "CRM-S2",
+    "projectName": "CRM Project for Sales"
+  }
+]
