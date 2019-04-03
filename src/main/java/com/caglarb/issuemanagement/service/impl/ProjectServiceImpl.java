@@ -2,7 +2,9 @@ package com.caglarb.issuemanagement.service.impl;
 
 import com.caglarb.issuemanagement.dto.ProjectDto;
 import com.caglarb.issuemanagement.entity.Project;
+import com.caglarb.issuemanagement.entity.User;
 import com.caglarb.issuemanagement.repo.ProjectRepository;
+import com.caglarb.issuemanagement.repo.UserRepository;
 import com.caglarb.issuemanagement.service.ProjectService;
 import com.caglarb.issuemanagement.util.TPage;
 import org.modelmapper.ModelMapper;
@@ -18,22 +20,27 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
 
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper modelMapper) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper modelMapper, UserRepository userRepository) {
         this.projectRepository = projectRepository;
         this.modelMapper = modelMapper;
+        this.userRepository= userRepository;
     }
 
 
     @Override
     public ProjectDto save(ProjectDto project) {
         Project projectCheck = projectRepository.getByProjectCode(project.getProjectCode());
-        if (projectCheck != null) {
 
-            throw new IllegalArgumentException("Project code already exist");
-        }
+        if (projectCheck != null)
+            throw new IllegalArgumentException("Project Code Already Exist");
+
         Project p = modelMapper.map(project, Project.class);
+        User user = userRepository.getOne(project.getManagerId());
+        p.setManager(user);
+
         p = projectRepository.save(p);
         project.setId(p.getId());
         return project;
@@ -79,19 +86,22 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDto update(Long id, ProjectDto project) {
         Project projectDb = projectRepository.getOne(id);
-        if (projectDb == null) {
-            throw new IllegalArgumentException("Project Does not Exist ID:" + id);
-        }
+        if (projectDb == null)
+            throw new IllegalArgumentException("Project Does Not Exist ID:" + id);
 
-        Project projectCheck = projectRepository.getByProjectCodeAndIdNot(project.getProjectCode(),id);
+        Project projectCheck = projectRepository.getByProjectCodeAndIdNot(project.getProjectCode(), id);
+        if (projectCheck != null)
+            throw new IllegalArgumentException("Project Code Already Exist");
 
-        if (projectCheck != null) {
-
-            throw new IllegalArgumentException("Project code already exist");
-        }
         projectDb.setProjectCode(project.getProjectCode());
         projectDb.setProjectName(project.getProjectName());
+
         projectRepository.save(projectDb);
         return modelMapper.map(projectDb, ProjectDto.class);
+    }
+
+    public List<ProjectDto> getAll() {
+        List<Project> data = projectRepository.findAll();
+        return Arrays.asList(modelMapper.map(data, ProjectDto[].class));
     }
 }
