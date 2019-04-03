@@ -3,9 +3,10 @@ package com.caglarb.issuemanagement.api;
 import com.caglarb.issuemanagement.dto.ProjectDto;
 import com.caglarb.issuemanagement.service.impl.ProjectServiceImpl;
 import com.caglarb.issuemanagement.util.ApiPaths;
+import com.caglarb.issuemanagement.util.TPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.http.HttpMethod;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,13 @@ public class ProjectController {
 
     public ProjectController(ProjectServiceImpl projectServiceImpl) { // inject ettik
         this.projectServiceImpl = projectServiceImpl;
+    }
+
+    @GetMapping("/pagination")
+    @ApiOperation(value = "Get By Pagination Operation", response = ProjectDto.class)
+    public ResponseEntity<TPage<ProjectDto>> getAllByPagination(Pageable pageable) {
+        TPage<ProjectDto> data = projectServiceImpl.getAllPageable(pageable);
+        return ResponseEntity.ok(data);
     }
 
     @ApiOperation(value = "Get By ID Operation", response = ProjectDto.class)

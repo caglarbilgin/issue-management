@@ -4,7 +4,7 @@ import com.caglarb.issuemanagement.dto.IssueDto;
 import com.caglarb.issuemanagement.entity.Issue;
 import com.caglarb.issuemanagement.repo.IssueRepository;
 import com.caglarb.issuemanagement.service.IssueService;
-import com.caglarb.issuemanagement.util.Tpage;
+import com.caglarb.issuemanagement.util.TPage;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,9 +44,9 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public Tpage<IssueDto> getAllPageable(Pageable pageable) {
+    public TPage<IssueDto> getAllPageable(Pageable pageable) {
         Page<Issue> data = issueRepository.findAll(pageable);
-        Tpage page = new Tpage<IssueDto>();
+        TPage page = new TPage<IssueDto>();
         IssueDto[] dtos = modelMapper.map(data.getContent(),IssueDto[].class);
         page.setStat(data, Arrays.asList(dtos));
         return page;

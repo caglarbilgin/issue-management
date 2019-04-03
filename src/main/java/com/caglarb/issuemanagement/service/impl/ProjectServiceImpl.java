@@ -4,7 +4,7 @@ import com.caglarb.issuemanagement.dto.ProjectDto;
 import com.caglarb.issuemanagement.entity.Project;
 import com.caglarb.issuemanagement.repo.ProjectRepository;
 import com.caglarb.issuemanagement.service.ProjectService;
-import com.caglarb.issuemanagement.util.Tpage;
+import com.caglarb.issuemanagement.util.TPage;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,11 +58,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Tpage<ProjectDto> getAllPageable(Pageable pageable) {
+    public TPage<ProjectDto> getAllPageable(Pageable pageable) {
         Page<Project> data = projectRepository.findAll(pageable);
-        Tpage<ProjectDto> response = new Tpage<ProjectDto>();
-        response.setStat(data, Arrays.asList(modelMapper.map(data.getContent(), ProjectDto[].class)));
-        return response;
+        TPage<ProjectDto> respnose = new TPage<ProjectDto>();
+        respnose.setStat(data, Arrays.asList(modelMapper.map(data.getContent(), ProjectDto[].class)));
+        return respnose;
     }
 
     @Override

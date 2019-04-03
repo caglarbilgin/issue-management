@@ -23,10 +23,10 @@ public class IssueManagementApplication {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return new ModelMapper();
     }
-    @Bean
+    /*@Bean
     public Jackson2RepositoryPopulatorFactoryBean repositoryPopulator() {
         Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
         factory.setResources(new Resource[]{new ClassPathResource("projects.json")});
         return factory;
-    }
+    }*/
 }
